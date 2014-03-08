@@ -80,6 +80,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
     private Rectangle rectangleWalter;
     private Rectangle rectangleJesse;
     private Image vidasWalter;
+    private Image vidasJesse;
     private boolean clickWalter;
     private boolean clickJesse;
 
@@ -100,9 +101,14 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         posY = (int) (getHeight() - 150);
         poslX = 260 /*(int)(getWidth() / 2)*/;
         poslY = (int) (getHeight() - 190);
-        URL vURL = this.getClass().getResource("Images/vidasWalter.png");
-        vidasWalter = Toolkit.getDefaultToolkit().getImage(vURL);
-        URL cURL = this.getClass().getResource("Images/walteronUnderwear.png");
+        //Se declaran las imagenes
+        URL vwURL = this.getClass().getResource("Images/vidasWalter.png");
+        vidasWalter = Toolkit.getDefaultToolkit().getImage(vwURL);
+        URL vjURL = this.getClass().getResource("Images/jesseface.png");
+        vidasJesse = Toolkit.getDefaultToolkit().getImage(vjURL);
+        
+        
+        URL cURL = this.getClass().getResource("Images/prueba1.png");
         fondo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(cURL));
         URL gURL = this.getClass().getResource("Images/gameover.png");
         gameOver = Toolkit.getDefaultToolkit().getImage(gURL);
@@ -157,7 +163,8 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                 s += (int) (getWidth() / 6);
             }
         }
-
+        
+        //se empieza a declarar e inicializar animaicones
         Image barraAnimWalterL1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/walterLeft1.png"));
         Image barraAnimWalterL2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/walterLeft2.png"));
 
@@ -508,6 +515,17 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                     g.drawImage(animBrickFlask.getImagen(), brick.getPosX(), brick.getPosY(), this);
                 }
                 g.drawImage(ballWalter.getImagen(), ball.getPosX(), ball.getPosY(), this);
+                //Controla las vidas a desplegar
+                if (vidas == 3) {
+                    g.drawImage(vidasWalter, 850, 50, this);
+                    g.drawImage(vidasWalter, 900, 50, this);
+                    g.drawImage(vidasWalter, 950, 50, this);
+                } else if (vidas == 2) {
+                    g.drawImage(vidasWalter, 900, 50, this);
+                    g.drawImage(vidasWalter, 950, 50, this);
+                } else if (vidas == 1) {
+                    g.drawImage(vidasWalter, 950, 50, this);
+                }
             } else if (clickJesse) {
                 if (direccion == 0) {
                     g.drawImage(barraAnimJesseSt.getImagen(), barra.getPosX(), barra.getPosY(), this);
@@ -522,18 +540,20 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                     g.drawImage(animBrickMoney.getImagen(), brick.getPosX(), brick.getPosY(), this);
                 }
                 g.drawImage(ballAnim.getImagen(), ball.getPosX(), ball.getPosY(), this);
+                //controla las vidas a desplegar
+                 if (vidas == 3) {
+                g.drawImage(vidasJesse, 850, 50, this);
+                g.drawImage(vidasJesse, 900, 50, this);
+                g.drawImage(vidasJesse, 950, 50, this);
+            } else if (vidas == 2) {
+                g.drawImage(vidasJesse, 900, 50, this);
+                g.drawImage(vidasJesse, 950, 50, this);
+            } else if (vidas == 1) {
+                g.drawImage(vidasJesse, 950, 50, this);
+            }
             }
 
-            if (vidas == 3) {
-                g.drawImage(vidasWalter, 850, 50, this);
-                g.drawImage(vidasWalter, 900, 50, this);
-                g.drawImage(vidasWalter, 950, 50, this);
-            } else if (vidas == 2) {
-                g.drawImage(vidasWalter, 900, 50, this);
-                g.drawImage(vidasWalter, 950, 50, this);
-            } else if (vidas == 1) {
-                g.drawImage(vidasWalter, 950, 50, this);
-            }
+           
             //g.drawImage(Meth.getImagen(), brick.getPosX(),brick.getPosY(), this);
         } else {
     
@@ -630,7 +650,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         posY = (int) (getHeight() - 150);
         poslX = 260 /*(int)(getWidth() / 2)*/;
         poslY = (int) (getHeight() - 190);
-        URL cURL = this.getClass().getResource("Images/walteronUnderwear.png");
+        URL cURL = this.getClass().getResource("Images/prueba1.png");
         fondo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(cURL));
         URL gURL = this.getClass().getResource("Images/gameover.png");
         gameOver = Toolkit.getDefaultToolkit().getImage(gURL);
