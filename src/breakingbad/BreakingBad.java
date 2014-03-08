@@ -90,7 +90,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         clickWalter = clickJesse = false;
         startScreen = true;
         sonido = true;
-        vidas = 3;
+        vidas = 0;
         tema = new SoundClip("Sounds/explosion.wav");
         explosion = new SoundClip("Sounds/explosion.wav");
         cont = 0;
@@ -112,7 +112,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         vatilloFumado = Toolkit.getDefaultToolkit().getImage(vfURL);
         
         
-        URL cURL = this.getClass().getResource("Images/prueba1.jpg");
+        URL cURL = this.getClass().getResource("Images/prueba1.png");
         fondo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(cURL));
         URL gURL = this.getClass().getResource("Images/gameover.png");
         gameOver = Toolkit.getDefaultToolkit().getImage(gURL);
@@ -671,7 +671,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         posY = (int) (getHeight()-120);
         poslX = 260 ;
         poslY = (int) (getHeight() - 160);
-        URL cURL = this.getClass().getResource("Images/prueba1.jpg");
+        URL cURL = this.getClass().getResource("Images/prueba1.png");
         fondo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(cURL));
         URL gURL = this.getClass().getResource("Images/gameover.png");
         gameOver = Toolkit.getDefaultToolkit().getImage(gURL);
