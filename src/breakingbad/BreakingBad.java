@@ -98,9 +98,9 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         addKeyListener(this);
         addMouseListener(this);
         posX = 253/*(int)(getWidth() / 2)*/;
-        posY = (int) (getHeight() - 150);
+        posY = (int) (getHeight()-100);
         poslX = 260 /*(int)(getWidth() / 2)*/;
-        poslY = (int) (getHeight() - 190);
+        poslY = (int) (getHeight() - 140);
         //Se declaran las imagenes
         URL vwURL = this.getClass().getResource("Images/vidasWalter.png");
         vidasWalter = Toolkit.getDefaultToolkit().getImage(vwURL);
@@ -369,7 +369,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         //Guarda el tiempo actual
         tiempoActual += tiempoTranscurrido;
 
-        //Actualiza la animaciÃ³n en base al tiempo transcurrido
+        //Actualiza la animacion en base al tiempo transcurrido
         barraAnimWalterLeft.actualiza(tiempoTranscurrido);
         barraAnimWalterRight.actualiza(tiempoTranscurrido);
         barraAnimWalterSt.actualiza(tiempoTranscurrido);
@@ -386,11 +386,18 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
 
         if (barra.getPosX() < 0) {
             barra.setPosX(0);
+            if(!empieza){
+                ball.setPosX(0);
+            }
             choca = true;
         }
 
         if (barra.getPosX() + barra.getAncho() > getWidth()) {
             barra.setPosX(getWidth() - barra.getAncho());
+            if(!empieza) {
+                ball.setPosX(getWidth() - ball.getAncho());
+                
+            }
             choca = true;
         }
 
