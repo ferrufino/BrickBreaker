@@ -391,7 +391,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         if (barra.getPosX() < 0) {
             barra.setPosX(0);
             if (!empieza) {
-                ball.setPosX(0);
+                ball.setPosX(barra.getPosX() + 10);
             }
             choca = true;
         }
@@ -399,7 +399,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         if (barra.getPosX() + barra.getAncho() > getWidth()) {
             barra.setPosX(getWidth() - barra.getAncho());
             if (!empieza) {
-                ball.setPosX(getWidth() - ball.getAncho());
+                ball.setPosX(barra.getPosX() + 10);
 
             }
             choca = true;
@@ -583,7 +583,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
             }
             g.setColor(Color.white);
             g.setFont(new Font("Avenir Black", Font.ITALIC, 30));
-            g.drawString("Score: " + score, 50, 80);
+            g.drawString("Score: " + score, 500, 80);
             //g.drawImage(Meth.getImagen(), brick.getPosX(),brick.getPosY(), this);
         } else {
             //Se acabo el juego
