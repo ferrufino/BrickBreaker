@@ -98,9 +98,9 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         addKeyListener(this);
         addMouseListener(this);
         posX = 253/*(int)(getWidth() / 2)*/;
-        posY = (int) (getHeight()-100);
+        posY = (int) (getHeight()-120);
         poslX = 260 /*(int)(getWidth() / 2)*/;
-        poslY = (int) (getHeight() - 140);
+        poslY = (int) (getHeight() - 160);
         //Se declaran las imagenes
         URL vwURL = this.getClass().getResource("Images/vidasWalter.png");
         vidasWalter = Toolkit.getDefaultToolkit().getImage(vwURL);
@@ -108,7 +108,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         vidasJesse = Toolkit.getDefaultToolkit().getImage(vjURL);
         
         
-        URL cURL = this.getClass().getResource("Images/prueba1.png");
+        URL cURL = this.getClass().getResource("Images/prueba1.jpg");
         fondo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(cURL));
         URL gURL = this.getClass().getResource("Images/gameover.png");
         gameOver = Toolkit.getDefaultToolkit().getImage(gURL);
@@ -423,7 +423,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
 
             if (vidas > 0) {
                 vidas--;
-                ball.setPosY(getHeight() - 190);
+                ball.setPosY(getHeight() - 160);
                 ball.setPosX(barra.getPosX() + 10);
                 empieza = false;
 
@@ -593,6 +593,15 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
 
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 empieza = true;
+                if (vidas == 3) {
+                    direccion2 = 2; 
+                } else if (vidas == 2) {
+                    direccion2 = 1;
+                } else {
+                    direccion2 = 2;
+                }
+                
+                
             }
 
             if (e.getKeyCode() == KeyEvent.VK_R) {
@@ -654,10 +663,10 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         setSize(1000, 800);
         addKeyListener(this);
         posX = 253/*(int)(getWidth() / 2)*/;
-        posY = (int) (getHeight() - 150);
+        posY = (int) (getHeight() - 120);
         poslX = 260 /*(int)(getWidth() / 2)*/;
-        poslY = (int) (getHeight() - 190);
-        URL cURL = this.getClass().getResource("Images/prueba1.png");
+        poslY = (int) (getHeight() - 120);
+        URL cURL = this.getClass().getResource("Images/prueba1.jpg");
         fondo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(cURL));
         URL gURL = this.getClass().getResource("Images/gameover.png");
         gameOver = Toolkit.getDefaultToolkit().getImage(gURL);
