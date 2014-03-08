@@ -90,7 +90,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         clickWalter = clickJesse = false;
         startScreen = true;
         sonido = true;
-        vidas = 0;
+        vidas = 3;
         tema = new SoundClip("Sounds/explosion.wav");
         explosion = new SoundClip("Sounds/explosion.wav");
         cont = 0;
