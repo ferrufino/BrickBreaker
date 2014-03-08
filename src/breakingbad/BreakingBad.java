@@ -51,6 +51,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
     private int direccion;
     private int direccion2;
     private int cont;
+    private int score;
     private Paddle barra;
     private Block brick;
     private Ball ball;
@@ -90,6 +91,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         startScreen = true;
         sonido = true;
         vidas = 3;
+        score = 0;
         tema = new SoundClip("Sounds/explosion.wav");
         explosion = new SoundClip("Sounds/explosion.wav");
         cont = 0;
@@ -100,7 +102,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         addMouseListener(this);
         posX = 253;
         posY = (int) (getHeight() - 120);
-        poslX = 260;
+        poslX = posX + 10;
         poslY = (int) (getHeight() - 160);
         //Se declaran las imagenes
         URL vwURL = this.getClass().getResource("Images/vidasWalter.png");
@@ -175,9 +177,9 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         barraAnimWalterLeft.sumaCuadro(barraAnimWalterL2, 100);
 
         Image ballWalter1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/meth.png"));
-        Image ballWalter2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/meth1.png"));
-        Image ballWalter3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/meth2.png"));
-        Image ballWalter4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/meth3.png"));
+        Image ballWalter2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/meth2.png"));
+        Image ballWalter3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/meth3.png"));
+        Image ballWalter4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/meth4.png"));
 
         ballWalter = new Animacion();
         ballWalter.sumaCuadro(ballWalter1, 50);
@@ -421,13 +423,14 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         if (ball.getPosY() < 0 && direccion2 == 1) {
             direccion2 = 4;
         }
-        if (ball.getPosY() + ball.getAlto() > barra.getPosY() + 20) {
+        if (ball.getPosY() + ball.getAlto() > getHeight() - ball.getAlto()) {
 
             if (vidas > 0) {
                 vidas--;
                 ball.setPosY(getHeight() - 160);
                 ball.setPosX(barra.getPosX() + 10);
                 empieza = false;
+                score -= 50;
 
             } else if (vidas == 0) {
                 perdiste = true;
@@ -435,12 +438,27 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
 
         }
         if (ball.intersecta(barra)) {
-            if (direccion2 == 3) {
-                direccion2 = 2;
+
+            if (ball.getPosY() + ball.getAlto() > getHeight() - barra.getAlto() + 10) {
+                if (vidas > 0) {
+                    vidas--;
+                    ball.setPosY(getHeight() - 160);
+                    ball.setPosX(barra.getPosX() + 10);
+                    empieza = false;
+                    score -= 50;
+
+                } else if (vidas == 0) {
+                    perdiste = true;
+                }
+            } else {
+                if (direccion2 == 3) {
+                    direccion2 = 2;
+                }
+                if (direccion2 == 4) {
+                    direccion2 = 1;
+                }
             }
-            if (direccion2 == 4) {
-                direccion2 = 1;
-            }
+
         }
         for (int i = 0; i < lista.size(); i++) {
             Block brickI = (Block) (lista.get(i));
@@ -449,6 +467,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                 brickI.setPosX(-1000);
                 brickI.setPosY(-1000);
                 explosion.play();
+                score += 100;
                 cont++;
             }
 
@@ -457,6 +476,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                 brickI.setPosX(-1000);
                 brickI.setPosY(-1000);
                 explosion.play();
+                score += 100;
                 cont++;
             }
 
@@ -465,6 +485,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                 brickI.setPosX(-1000);
                 brickI.setPosY(-1000);
                 explosion.play();
+                score += 100;
                 cont++;
             }
 
@@ -472,6 +493,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                 direccion2 = 1;
                 brickI.setPosX(-1000);
                 brickI.setPosY(-1000);
+                score += 100;
                 cont++;
                 explosion.play();
             }
@@ -498,8 +520,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
     public void paint1(Graphics g) {
 
         if (startScreen) {
-            g.setColor(Color.cyan);
-            g.setFont(new Font("Avenir Black", Font.ITALIC, 30));
+
             g.drawImage(startGame.getImage(), 0, 0, this);
 
         } else if (vidas > 0) {
@@ -560,7 +581,9 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                     g.drawImage(vidasJesse, 950, 50, this);
                 }
             }
-
+            g.setColor(Color.white);
+            g.setFont(new Font("Avenir Black", Font.ITALIC, 30));
+            g.drawString("Score: " + score, 50, 80);
             //g.drawImage(Meth.getImagen(), brick.getPosX(),brick.getPosY(), this);
         } else {
             //Se acabo el juego
@@ -593,26 +616,29 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
             }
 
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                empieza = true;
-                if (vidas == 3) {
-                    direccion2 = 2;
-                } else if (vidas == 2) {
-                    direccion2 = 1;
-                } else {
-                    direccion2 = 2;
+                if ((ball.getPosX() == barra.getPosX() + 10) && (ball.getPosY() == getHeight() - 160)) {
+                    empieza = true;
+                    if (vidas == 3) {
+                        direccion2 = 2;
+                    } else if (vidas == 2) {
+                        direccion2 = 1;
+                    } else {
+                        direccion2 = 2;
+                    }
                 }
 
             }
 
             if (e.getKeyCode() == KeyEvent.VK_R) {
-                if(vidas>0){
+                if (vidas > 0) {
                     reinicia();
                 }
-                
-            }
-            if (e.getKeyCode() == KeyEvent.VK_I && vidas==0) {
 
-                startScreen=true;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_I && vidas == 0) {
+                reinicia();
+                startScreen = true;
+
             }
         }
 
@@ -629,10 +655,12 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
 
     public void mouseClicked(MouseEvent e) {
         if (rectangleWalter.contains(e.getX(), e.getY()) && startScreen == true) {
-            clickWalter = !clickWalter;
+            clickWalter = true;
+            clickJesse = false;
             startScreen = false;
         } else if (rectangleJesse.contains(e.getX(), e.getY()) && startScreen == true) {
-            clickJesse = !clickJesse;
+            clickJesse = true;
+            clickWalter = false;
             startScreen = false;
         }
     }
@@ -666,6 +694,8 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         tema = new SoundClip("Sounds/explosion.wav");
         explosion = new SoundClip("Sounds/explosion.wav");
         cont = 0;
+        vidas = 3;
+        score = 0;
         setSize(1000, 800);
         addKeyListener(this);
         posX = 253;
