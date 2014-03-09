@@ -814,6 +814,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         //sonido = true;
         //tema = new SoundClip("Sounds/Breaking_Bad.wav");
         //explosion = new SoundClip("Sounds/e.wav");
+        theme.play();
         cont = 0;
         vidas = 3;
         score = 0;
@@ -895,6 +896,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         if (nivel2 == false) {
             nivel2 = true;
         }
+        theme.play();
 
         //tema = new SoundClip("Sounds/Breaking_Bad.wav");
         //explosion = new SoundClip("Sounds/fail-buzzer-03.wav");
