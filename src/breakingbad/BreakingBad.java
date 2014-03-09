@@ -92,8 +92,8 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         sonido = true;
         vidas = 3;
         score = 0;
-        tema = new SoundClip("Sounds/explosion.wav");
-        explosion = new SoundClip("Sounds/explosion.wav");
+        tema = new SoundClip("Sounds///explosion.wav");
+        //explosion = new SoundClip("Sounds///explosion.wav");
         cont = 0;
         rectangleWalter = new Rectangle(245, 470, 165, 280);
         rectangleJesse = new Rectangle(570, 470, 165, 280);
@@ -135,37 +135,42 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         direccion2 = 1;
         pausa = false;
         lista = new LinkedList<Block>();
-        int l = 0;
-        int t = 0;
-        int s = 0;
-        for (int i = 0; i < 15; i++) {
+ 
+        int diffBrickr1 = 0;
+        int diffBrickr2 = 0;
+        int diffBricker3 = 0;
 
-            if (i < 5) {
 
-                posrX = (int) ((getWidth() / 6) + l - 17);    //posision x es tres cuartos del applet
-                posrY = 100;    //posision y es tres cuartos del applet
+        for (int i = 0; i < 29; i++) {
+
+            if (i < 12) {
+
+                posrX = (int) ((getWidth() / 30-10) + diffBrickr1);    //posision x es tres cuartos del applet
+                posrY = 275;    //posision y es tres cuartos del applet
                 brick = new Block(posrX, posrY, Toolkit.getDefaultToolkit().getImage(rURL));
                 lista.add(brick);
-                l += (int) (getWidth() / 6);
+                diffBrickr1 += (int) (getWidth() / 12);
             }
 
-            if (i > 4 && i < 10) {
+            if (i > 11 && i <= 19) {
 
-                posrX = (int) ((getWidth() / 6) + t - 17);    //posision x es tres cuartos del applet
-                posrY = 200;    //posision y es tres cuartos del applet
+                posrX = (int) ((getWidth() / 28 - 10) + diffBrickr2);    //posision x es tres cuartos del applet
+                posrY = 350;    //posision y es tres cuartos del applet
                 brick = new Block(posrX, posrY, Toolkit.getDefaultToolkit().getImage(rURL));
                 lista.add(brick);
-                t += (int) (getWidth() / 6);
+                diffBrickr2 += (int) (getWidth() / 9);
             }
 
-            if (i > 9) {
+            if (i > 20 && i <= 29) {
 
-                posrX = (int) ((getWidth() / 6) + s - 17);    //posision x es tres cuartos del applet
-                posrY = 300;    //posision y es tres cuartos del applet
+                posrX = (int) ((getWidth() / 8 + 10) + diffBricker3);    //posision x es tres cuartos del applet
+                posrY = 425;    //posision y es tres cuartos del applet
                 brick = new Block(posrX, posrY, Toolkit.getDefaultToolkit().getImage(rURL));
                 lista.add(brick);
-                s += (int) (getWidth() / 6);
+                diffBricker3 += (int) (getWidth() / 9);
             }
+            
+
         }
 
         //se empieza a declarar e inicializar animaicones
@@ -281,89 +286,75 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         }
 
         if (direccion == 1) {
-            barra.setPosX(barra.getPosX() - 3);
+            barra.setPosX(barra.getPosX() - barra.getSpeed());
             if (!empieza && !choca) {
                 ball.setPosX(ball.getPosX() - 3);
             }
         }
         if (direccion == 2) {
-            barra.setPosX(barra.getPosX() + 3);
+            barra.setPosX(barra.getPosX() + barra.getSpeed());
             if (!empieza && !choca) {
                 ball.setPosX(ball.getPosX() + 3);
             }
         }
         if (empieza) {
             if (direccion2 == 1) {
-                if (cont < 2) {
+                if (cont < 13) {
                     ball.setPosX(ball.getPosX() + 2);
                     ball.setPosY(ball.getPosY() - 2);
+                   // barra.setSpeed(barra.getSpeed()+2);
                 }
-                if (cont > 1 && cont < 5) {
+                if (cont > 12 && cont < 20) {
                     ball.setPosX(ball.getPosX() + 3);
                     ball.setPosY(ball.getPosY() - 3);
+                   // barra.setSpeed(barra.getSpeed()+2);
                 }
-                if (cont > 4 && cont < 9) {
+                if (cont > 19) {
                     ball.setPosX(ball.getPosX() + 4);
                     ball.setPosY(ball.getPosY() - 4);
                 }
-                if (cont > 8) {
-                    ball.setPosX(ball.getPosX() + 5);
-                    ball.setPosY(ball.getPosY() - 5);
-                }
             }
             if (direccion2 == 2) {
-                if (cont < 2) {
+                if (cont < 13) {
                     ball.setPosX(ball.getPosX() - 2);
                     ball.setPosY(ball.getPosY() - 2);
                 }
-                if (cont > 1 && cont < 5) {
+                if (cont > 12 && cont < 20) {
                     ball.setPosX(ball.getPosX() - 3);
                     ball.setPosY(ball.getPosY() - 3);
                 }
-                if (cont > 4 && cont < 9) {
+                if (cont > 19) {
                     ball.setPosX(ball.getPosX() - 4);
                     ball.setPosY(ball.getPosY() - 4);
-                }
-                if (cont > 8) {
-                    ball.setPosX(ball.getPosX() - 5);
-                    ball.setPosY(ball.getPosY() - 5);
                 }
 
             }
             if (direccion2 == 3) {
-                if (cont < 2) {
+                if ( cont < 13) {
                     ball.setPosX(ball.getPosX() - 2);
                     ball.setPosY(ball.getPosY() + 2);
                 }
-                if (cont > 1 && cont < 5) {
+                if (cont > 12 && cont < 20) {
                     ball.setPosX(ball.getPosX() - 3);
                     ball.setPosY(ball.getPosY() + 3);
                 }
-                if (cont > 4 && cont < 9) {
+                if (cont > 19) {
                     ball.setPosX(ball.getPosX() - 4);
                     ball.setPosY(ball.getPosY() + 4);
                 }
-                if (cont > 8) {
-                    ball.setPosX(ball.getPosX() - 5);
-                    ball.setPosY(ball.getPosY() + 5);
-                }
             }
             if (direccion2 == 4) {
-                if (cont < 2) {
+                if (cont < 13) {
                     ball.setPosX(ball.getPosX() + 2);
                     ball.setPosY(ball.getPosY() + 2);
                 }
-                if (cont > 1 && cont < 5) {
+                if (cont > 12 && cont < 20) {
                     ball.setPosX(ball.getPosX() + 3);
                     ball.setPosY(ball.getPosY() + 3);
                 }
-                if (cont > 4 && cont < 9) {
+                if (cont > 19) {
                     ball.setPosX(ball.getPosX() + 4);
                     ball.setPosY(ball.getPosY() + 4);
-                }
-                if (cont > 8) {
-                    ball.setPosX(ball.getPosX() + 5);
-                    ball.setPosY(ball.getPosY() + 5);
                 }
             }
         }
@@ -466,7 +457,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                 direccion2 = 4;
                 brickI.setPosX(-1000);
                 brickI.setPosY(-1000);
-                explosion.play();
+                //explosion.play();
                 score += 100;
                 cont++;
             }
@@ -475,7 +466,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                 direccion2 = 3;
                 brickI.setPosX(-1000);
                 brickI.setPosY(-1000);
-                explosion.play();
+                //explosion.play();
                 score += 100;
                 cont++;
             }
@@ -484,7 +475,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                 direccion2 = 2;
                 brickI.setPosX(-1000);
                 brickI.setPosY(-1000);
-                explosion.play();
+                //explosion.play();
                 score += 100;
                 cont++;
             }
@@ -495,7 +486,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                 brickI.setPosY(-1000);
                 score += 100;
                 cont++;
-                explosion.play();
+                //explosion.play();
             }
         }
     }
@@ -526,7 +517,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         } else if (vidas > 0) {
 
             if (sonido) {
-                tema.play();
+                //tema.play();
                 sonido = false;
             }
             g.drawImage(fondo.getImage(), 0, 0, this);
@@ -691,8 +682,8 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
 
     public void reinicia() {
         sonido = true;
-        tema = new SoundClip("Sounds/explosion.wav");
-        explosion = new SoundClip("Sounds/explosion.wav");
+        tema = new SoundClip("Sounds///explosion.wav");
+        //explosion = new SoundClip("Sounds///explosion.wav");
         cont = 0;
         vidas = 3;
         score = 0;
@@ -700,7 +691,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         addKeyListener(this);
         posX = 253;
         posY = (int) (getHeight() - 120);
-        poslX = 260;
+        poslX = 263;
         poslY = (int) (getHeight() - 160);
         URL cURL = this.getClass().getResource("Images/prueba1.png");
         fondo = new ImageIcon(Toolkit.getDefaultToolkit().getImage(cURL));
@@ -724,36 +715,44 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         int t = 0;
         int s = 0;
         vidas = 3;
-        for (int i = 0; i < 15; i++) {
 
-            if (i < 5) {
 
-                posrX = (int) ((getWidth() / 6) + l - 17);    //posision x es tres cuartos del applet
-                posrY = 100;    //posision y es tres cuartos del applet
+        int diffBrickr1 = 0;
+        int diffBrickr2 = 0;
+        int diffBricker3 = 0;
+
+
+        for (int i = 0; i < 29; i++) {
+
+            if (i < 12) {
+
+                posrX = (int) ((getWidth() / 30-10) + diffBrickr1);    //posision x es tres cuartos del applet
+                posrY = 275;    //posision y es tres cuartos del applet
                 brick = new Block(posrX, posrY, Toolkit.getDefaultToolkit().getImage(rURL));
                 lista.add(brick);
-                l += (int) (getWidth() / 6);
+                diffBrickr1 += (int) (getWidth() / 12);
             }
 
-            if (i > 4 && i < 10) {
+            if (i > 11 && i <= 19) {
 
-                posrX = (int) ((getWidth() / 6) + t - 17);    //posision x es tres cuartos del applet
-                posrY = 200;    //posision y es tres cuartos del applet
+                posrX = (int) ((getWidth() / 28 - 10) + diffBrickr2);    //posision x es tres cuartos del applet
+                posrY = 350;    //posision y es tres cuartos del applet
                 brick = new Block(posrX, posrY, Toolkit.getDefaultToolkit().getImage(rURL));
                 lista.add(brick);
-                t += (int) (getWidth() / 6);
+                diffBrickr2 += (int) (getWidth() / 9);
             }
 
-            if (i > 9) {
+            if (i > 20 && i <= 29) {
 
-                posrX = (int) ((getWidth() / 6) + s - 17);    //posision x es tres cuartos del applet
-                posrY = 300;    //posision y es tres cuartos del applet
+                posrX = (int) ((getWidth() / 8 + 10) + diffBricker3);    //posision x es tres cuartos del applet
+                posrY = 425;    //posision y es tres cuartos del applet
                 brick = new Block(posrX, posrY, Toolkit.getDefaultToolkit().getImage(rURL));
                 lista.add(brick);
-                s += (int) (getWidth() / 6);
+                diffBricker3 += (int) (getWidth() / 9);
             }
+            
+
         }
-
     }
 
 }

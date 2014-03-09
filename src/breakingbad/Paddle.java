@@ -19,11 +19,32 @@ public class Paddle extends Base {
     public Paddle(int posX, int posY, Image image) {
         super(posX, posY, image);
 
-        speed = 5;
+        speed = 3;
 
     }
     //Variables Strings
     private static final String PAUSADO = "PAUSADO";
     private static final String DESAPARECE = "DESAPARECE";
+    
+    
+    /**
+     * Metodo <I>speed</I> de la clase <code>Base</code>.
+     *
+     * @return regresa la velocidad del objeto paddle.
+     *
+     */
+    public int getSpeed() {
+        return speed;
+    }
+
+    /**
+     * Metodo <I>setSpeed</I> de la clase <code>Base</code>,
+     *
+     * Modifica el valos de speed
+     *
+     */
+    public void setSpeed( int num) {
+        speed+=num;
+    }
 
 }
