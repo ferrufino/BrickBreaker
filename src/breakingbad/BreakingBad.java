@@ -94,7 +94,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         clickWalter = clickJesse = false;
         startScreen = true;
         sonido = true;
-        vidas = 3;
+        vidas = 0;
         score = 0;
         nivel2 = false;
         tema = new SoundClip("Sounds/explosion.wav");
@@ -268,6 +268,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
 
                 actualiza();
                 checaColision();
+                
             }
 
             repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
@@ -282,22 +283,26 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
     }
 
     public void actualiza() {
-        if (cont == 28 && !nivel2) {
+        if (cont == 1 && !nivel2) {
             nuevoNivel();
-        } else if (nivel2 && cont == 31) {
+        } 
+        
+        if (nivel2 && cont == 31) {
+            vidas=0;
             ganaste = true;
+            
         }
 
         if (direccion == 1) {
             barra.setPosX(barra.getPosX() - barra.getSpeed());
             if (!empieza && !choca) {
-                ball.setPosX(ball.getPosX() - 4);
+                ball.setPosX(ball.getPosX() - 5);
             }
         }
         if (direccion == 2) {
             barra.setPosX(barra.getPosX() + barra.getSpeed());
             if (!empieza && !choca) {
-                ball.setPosX(ball.getPosX() + 4);
+                ball.setPosX(ball.getPosX() + 5);
             }
         }
         if (empieza) {
@@ -501,7 +506,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                     brickJ.setPosX(-1000);
                     brickJ.setPosY(-1000);
                     //explosion.play();
-                    score += 100;
+                    score += 250;
                     cont++;
                 }
 
@@ -510,7 +515,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                     brickJ.setPosX(-1000);
                     brickJ.setPosY(-1000);
                     //explosion.play();
-                    score += 100;
+                    score += 250;
                     cont++;
                 }
 
@@ -519,7 +524,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                     brickJ.setPosX(-1000);
                     brickJ.setPosY(-1000);
                     //exploson.play();
-                    score += 100;
+                    score += 250;
                     cont++;
                 }
 
@@ -527,7 +532,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
                     direccion2 = 1;
                     brickJ.setPosX(-1000);
                     brickJ.setPosY(-1000);
-                    score += 100;
+                    score += 250;
                     cont++;
                     //explosion.play();
                 }
@@ -620,6 +625,11 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
             g.setColor(Color.white);
             g.setFont(new Font("Avenir Black", Font.ITALIC, 30));
             g.drawString("Score: " + score, 500, 80);
+            
+            if (!empieza) {
+            g.setFont(new Font("Avenir Black", Font.ITALIC, 60));
+            g.drawString("Press Space Bar to Start!", 150, 600);
+            }
             //Dibuja bloques de nivel dos
             if (nivel2) {
                 for (int i = 0; i < listaBricks.size(); i++) {
@@ -630,11 +640,16 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
 
         } else {
             //Se acabo el juego
-            if (ganaste == true) {
-                g.drawString("GANASTE!", 300, 200);
-            }
+            
             g.drawImage(gameOver, 0, 0, this);
+             g.setColor(Color.white);
+            g.setFont(new Font("Avenir Black", Font.BOLD, 60));
             g.drawImage(vatilloFumado, 325, 350, this);
+            if (ganaste) {
+                g.drawString("You won!", 20, 250);
+            } else if ( (vidas == 0) && (!ganaste)) {
+                g.drawString("You loose.", 20, 250);
+            }
             tema.stop();
 
         }
@@ -644,7 +659,9 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
     public void keyPressed(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_P) {
-            pausa = !pausa;
+          
+                pausa=!pausa;
+       
         }
         if (!pausa) {
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -663,7 +680,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
 
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 if ((ball.getPosX() == barra.getPosX() + 10) && (ball.getPosY() == getHeight() - 160)) {
-                    empieza = true;
+                    empieza = true; 
                     if (vidas == 3) {
                         direccion2 = 2;
                     } else if (vidas == 2) {
@@ -771,7 +788,6 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         ball = new Ball(poslX, poslY, Toolkit.getDefaultToolkit().getImage(pURL));
         empieza = false;
         reiniciar = false;
-        perdiste = false;
         ganaste = false;
         choca = false;
         direccion = 0;
@@ -897,13 +913,13 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         for (int i = 0; i < 3; i++) {
 
             if (i == 0) {
-                bricknivel = new Block(getWidth() / 2 - 32, getHeight() / 2 - 55, Toolkit.getDefaultToolkit().getImage(bmURL));
+                bricknivel = new Block(getWidth() / 2 - 42, getHeight() / 2 - 55, Toolkit.getDefaultToolkit().getImage(bmURL));
                 listaBricks.add(bricknivel); // brick en el centro
             } else if (i == 1) {
                 bricknivel = new Block(getWidth() / 4 - 10, getHeight() / 2 + 10, Toolkit.getDefaultToolkit().getImage(bmURL));
                 listaBricks.add(bricknivel); // brick en la izquierda
             } else if (i == 2) {
-                bricknivel = new Block(getWidth() - 310, getHeight() / 2 + 10, Toolkit.getDefaultToolkit().getImage(bmURL));
+                bricknivel = new Block(getWidth() - 315, getHeight() / 2 + 13, Toolkit.getDefaultToolkit().getImage(bmURL));
                 listaBricks.add(bricknivel);// brick en la derecha
 
             }

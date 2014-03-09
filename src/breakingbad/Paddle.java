@@ -19,7 +19,7 @@ public class Paddle extends Base {
     public Paddle(int posX, int posY, Image image) {
         super(posX, posY, image);
 
-        speed = 4;
+        speed = 5;
 
     }
     //Variables Strings
