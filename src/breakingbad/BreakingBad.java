@@ -860,7 +860,7 @@ public class BreakingBad extends JFrame implements KeyListener, Runnable,
         for (int i = 0; i < 3; i++) {
 
             if (i == 0) {
-                bricknivel = new Block(getWidth()/2-28, getHeight()/2-50, Toolkit.getDefaultToolkit().getImage(bmURL));
+                bricknivel = new Block(getWidth()/2-32, getHeight()/2-55, Toolkit.getDefaultToolkit().getImage(bmURL));
                 listaBricks.add(bricknivel); // brick en el centro
             } else if (i == 1) {
                 bricknivel = new Block(getWidth()/4-10, getHeight()/2+10, Toolkit.getDefaultToolkit().getImage(bmURL));
